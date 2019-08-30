@@ -60,6 +60,7 @@ def run_dynesty_sampler(lnprobfn, prior_transform, ndim, verbose=True,
     ncall = dsampler.ncall
     niter = dsampler.it - 1
     tstart = time.time()
+
     for results in dsampler.sample_initial(nlive=nested_nlive_init,
                                            dlogz=nested_dlogz_init,
                                            maxcall=nested_maxcall_init,

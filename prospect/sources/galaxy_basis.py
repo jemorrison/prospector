@@ -35,6 +35,7 @@ class CSPSpecBasis(SSPBasis):
         self.ssp = fsps.StellarPopulation(compute_vega_mags=compute_vega_mags,
                                           zcontinuous=zcontinuous,
                                           vactoair_flag=vactoair_flag)
+
         self.reserved_params = reserved_params
         self.params = {}
         self.update(**kwargs)
@@ -60,6 +61,7 @@ class CSPSpecBasis(SSPBasis):
             The index of the component for which to pull out individual
             parameters that are passed to the fsps.StellarPopulation object.
         """
+        
         for k, v in list(self.params.items()):
             # Parameters named like FSPS params but that we reserve for use
             # here.  Do not pass them to FSPS.
@@ -68,6 +70,8 @@ class CSPSpecBasis(SSPBasis):
             # Otherwise if a parameter exists in the FSPS parameter set, pass a
             # copy of it in.
             if k in self.ssp.params.all_params:
+                # print('value k',k) 
+                # print('value v',v)
                 v = np.atleast_1d(v)
                 try:
                     # Try to pull the relevant component.
@@ -78,7 +82,6 @@ class CSPSpecBasis(SSPBasis):
                 except(TypeError):
                     # It was scalar, use that value for all components
                     this_v = v
-
                 self.ssp.params[k] = deepcopy(this_v)
 
     def get_galaxy_spectrum(self, **params):
@@ -99,6 +102,7 @@ class CSPSpecBasis(SSPBasis):
         :returns mass_fraction:
             Fraction of the formed stellar mass that still exists.
         """
+
         self.update(**params)
         spectra = []
         mass = np.atleast_1d(self.params['mass']).copy()
@@ -108,6 +112,8 @@ class CSPSpecBasis(SSPBasis):
             self.update_component(i)
             wave, spec = self.ssp.get_spectrum(tage=self.ssp.params['tage'],
                                                peraa=False)
+#            print('size of wave and spec',wave.shape,spec.shape)
+
             spectra.append(spec)
             mfrac[i] = (self.ssp.stellar_mass)
 

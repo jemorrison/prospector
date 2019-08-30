@@ -76,6 +76,7 @@ class SedModel(ProspectorParams):
             steallr mass formed.
         """
         self.set_parameters(theta)
+
         spec, phot, extras = sps.get_spectrum(outwave=obs['wavelength'],
                                               filters=obs['filters'],
                                               component=obs.get('component', -1),

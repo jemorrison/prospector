@@ -284,6 +284,30 @@ _agn_ = {"fagn": fagn,       # FSPS parameter.
 TemplateLibrary["agn"] = (_agn_,
                           ("The set of (fixed) AGN dusty torus emission parameters."))
 
+
+# -----------------------------------------
+# --- AGN Inclined Torus and Polar Dust ---
+# -----------------------------------------
+add_agni =  {"N": 1, "isfree": False, "init": True}
+
+fagni = {'N': 1, 'isfree': False,
+        'init': 1e-4, 'units': r'L_{AGN}/L_*',
+        'prior': priors.LogUniform(mini=1e-5, maxi=3.0)}
+
+
+agn_incl = {"N": 1, 'isfree': False,
+           "init": 5.0, 'units': r"incl",
+           'prior': priors.TopHat(mini=1e-5, maxi=90.)}
+#           'prior': priors.LogUniform(mini=1e-5, maxi=90.)}
+
+_agni_ = {"fagni": fagni,       # FSPS parameter.
+         "agn_incl": agn_incl,  # FSPS parameter.
+         "add_agn_incl": add_agni
+         }
+
+TemplateLibrary["agni"] = (_agni_,
+                          ("The set of (fixed) AGN inclined torus emission parameters."))
+
 # --------------------------
 # --- IGM Absorption ---
 # --------------------------
