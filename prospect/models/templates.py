@@ -284,9 +284,8 @@ _agn_ = {"fagn": fagn,       # FSPS parameter.
 TemplateLibrary["agn"] = (_agn_,
                           ("The set of (fixed) AGN dusty torus emission parameters."))
 
-
 # -----------------------------------------
-# --- AGN Inclined Torus and Polar Dust ---
+# --- AGN Inclined Torus  ---
 # -----------------------------------------
 add_agni =  {"N": 1, "isfree": False, "init": True}
 
@@ -294,11 +293,9 @@ fagni = {'N': 1, 'isfree': False,
         'init': 1e-4, 'units': r'L_{AGN}/L_*',
         'prior': priors.LogUniform(mini=1e-5, maxi=3.0)}
 
-
 agn_incl = {"N": 1, 'isfree': False,
            "init": 5.0, 'units': r"incl",
            'prior': priors.TopHat(mini=1e-5, maxi=90.)}
-#           'prior': priors.LogUniform(mini=1e-5, maxi=90.)}
 
 _agni_ = {"fagni": fagni,       # FSPS parameter.
          "agn_incl": agn_incl,  # FSPS parameter.
@@ -307,6 +304,37 @@ _agni_ = {"fagni": fagni,       # FSPS parameter.
 
 TemplateLibrary["agni"] = (_agni_,
                           ("The set of (fixed) AGN inclined torus emission parameters."))
+
+# -----------------------------------------
+# --- AGN Polar Dust  ---
+# -----------------------------------------
+add_agnp =  {"N": 1, "isfree": False, "init": True}
+
+fagnp = {'N': 1, 'isfree': False,
+        'init': 1e-4, 'units': r'L_{AGN}/L_*',
+        'prior': priors.LogUniform(mini=1e-5, maxi=3.0)}
+
+_agnp_ = {"fagnp": fagni,       # FSPS parameter.
+         "add_agn_polar": add_agnp
+         }
+
+TemplateLibrary["agnp"] = (_agnp_,
+                          ("Add AGN polar dust  emission parameters."))
+
+
+# -----------------------------------------
+# --- AGN Inclination and Polar Dust  ---
+# -----------------------------------------
+add_agnip =  {"N": 1, "isfree": False, "init": True}
+
+_agnip_ = {"fagni": fagni,       # FSPS parameter.
+         "agn_incl": agn_incl,  # FSPS parameter.
+         "fagnp": fagnp,  # FSPS parameter.
+         "add_agn_incl_polar": add_agnip
+         }
+
+TemplateLibrary["agnip"] = (_agnip_,
+                          ("Add AGN inclination and  polar dust  emission parameters."))
 
 # --------------------------
 # --- IGM Absorption ---

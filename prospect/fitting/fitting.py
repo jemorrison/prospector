@@ -198,6 +198,8 @@ def fit_model(obs, model, sps, noise=(None, None), lnprobfn=lnprobfn,
     # Make sure obs has required keys
     obs = fix_obs(obs)
 
+    # print('done fix_obs')
+
     if emcee & dynesty:
         msg = ("Cannot run both emcee and dynesty fits "
                "in a single call to fit_model")
@@ -489,6 +491,8 @@ def run_dynesty(obs, model, sps, noise, lnprobfn=lnprobfn,
     lnp = wrap_lnp(lnprobfn, obs, model, sps, noise=noise,
                    nested=True)
 
+    # print('fitting.py: returned from wrap_lnp')
+
     # Need to deal with postkwargs...
 
     t = time.time()
@@ -497,6 +501,7 @@ def run_dynesty(obs, model, sps, noise, lnprobfn=lnprobfn,
                                      wt_function=weight_function,
                                      nested_stop_kwargs=nested_stop_kwargs,
                                      pool=pool, **kwargs)
+    # print('run_dynesty_sampler')
     ts = time.time() - t
 
     return dynestyout, ts

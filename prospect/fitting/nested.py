@@ -56,6 +56,8 @@ def run_dynesty_sampler(lnprobfn, prior_transform, ndim, verbose=True,
                                             walks=nested_walks, bootstrap=nested_bootstrap,
                                             use_pool=use_pool)
 
+    # print('instantiate sampler')
+
     # generator for initial nested sampling
     ncall = dsampler.ncall
     niter = dsampler.it - 1
@@ -66,6 +68,7 @@ def run_dynesty_sampler(lnprobfn, prior_transform, ndim, verbose=True,
                                            maxcall=nested_maxcall_init,
                                            maxiter=nested_maxiter_init,
                                            live_points=nested_live_points):
+
         (worst, ustar, vstar, loglstar, logvol,
          logwt, logz, logzvar, h, nc, worst_it,
          propidx, propiter, eff, delta_logz) = results

@@ -70,8 +70,8 @@ class CSPSpecBasis(SSPBasis):
             # Otherwise if a parameter exists in the FSPS parameter set, pass a
             # copy of it in.
             if k in self.ssp.params.all_params:
-                # print('value k',k) 
-                # print('value v',v)
+                # print('galaxy_basis: value k',k) 
+                # print('galaxy_basis: value v',v)
                 v = np.atleast_1d(v)
                 try:
                     # Try to pull the relevant component.
